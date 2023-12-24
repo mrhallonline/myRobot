@@ -25,21 +25,17 @@ class MotorDriver():
         if(motor == 0):
             pwm.setDutycycle(self.PWMA, speed)
             if(index == Dir[0]):
-                print ("1")
                 pwm.setLevel(self.AIN1, 0)
                 pwm.setLevel(self.AIN2, 1)
             else:
-                print ("2")
                 pwm.setLevel(self.AIN1, 1)
                 pwm.setLevel(self.AIN2, 0)
         else:
             pwm.setDutycycle(self.PWMB, speed)
             if(index == Dir[0]):
-                print ("3")
                 pwm.setLevel(self.BIN1, 0)
                 pwm.setLevel(self.BIN2, 1)
             else:
-                print ("4")
                 pwm.setLevel(self.BIN1, 1)
                 pwm.setLevel(self.BIN2, 0)
 
@@ -49,29 +45,21 @@ class MotorDriver():
         else:
             pwm.setDutycycle(self.PWMB, 0)
 
-print("this is a motor driver test code")
-Motor = MotorDriver()
 
-print("forward 1 s")
-Motor.MotorRun(0, 'forward', 75)
-Motor.MotorRun(1, 'forward', 75)
-time.sleep(1)
+try:
+    Motor = MotorDriver()
+    # control 2 motor
+    Motor.MotorRun(0, 'forward', 100)
+    Motor.MotorRun(1, 'backward', 100)
+    while(1):
+        time.sleep(1)
 
-print("backward 1 s")
-Motor.MotorRun(0, 'backward', 75)
-Motor.MotorRun(1, 'backward', 75)
-time.sleep(1)
+except IOError as e:
+    print(e)
+    
+except KeyboardInterrupt:    
+    print("\r\nctrl + c:")
+    Motor.MotorRun(0, 'forward', 0)
+    Motor.MotorRun(1, 'backward', 0)
+    exit()
 
-print("right 1 s")
-Motor.MotorRun(0, 'backward', 75)
-Motor.MotorRun(1, 'forward', 75)
-time.sleep(1)
-
-print("right 1 s")
-Motor.MotorRun(0, 'forward', 75)
-Motor.MotorRun(1, 'backward', 75)
-time.sleep(1)
-
-print("stop")
-Motor.MotorStop(0)
-Motor.MotorStop(1)

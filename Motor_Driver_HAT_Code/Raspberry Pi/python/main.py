@@ -52,25 +52,15 @@ class MotorDriver():
 print("this is a motor driver test code")
 Motor = MotorDriver()
 
-print("forward 1 s")
-Motor.MotorRun(0, 'forward', 75)
-Motor.MotorRun(1, 'forward', 75)
-time.sleep(1)
+print("forward 2 s")
+Motor.MotorRun(0, 'forward', 100)
+Motor.MotorRun(1, 'forward', 100)
+time.sleep(2)
 
-print("backward 1 s")
-Motor.MotorRun(0, 'backward', 75)
-Motor.MotorRun(1, 'backward', 75)
-time.sleep(1)
-
-print("right 1 s")
-Motor.MotorRun(0, 'backward', 75)
-Motor.MotorRun(1, 'forward', 75)
-time.sleep(1)
-
-print("right 1 s")
-Motor.MotorRun(0, 'forward', 75)
-Motor.MotorRun(1, 'backward', 75)
-time.sleep(1)
+print("backward 2 s")
+Motor.MotorRun(0, 'backward', 100)
+Motor.MotorRun(1, 'backward', 100)
+time.sleep(2)
 
 print("stop")
 Motor.MotorStop(0)
