@@ -46,15 +46,15 @@ class MotorDriver():
         # Stop specified motor
         pwm.setDutycycle(self.PWMA if motor == RMOTOR else self.PWMB, 0)
 
-    def Forward(self, direction, speed):
+    def Forward(self, rightMotorSpeed, leftMotorSpeed):
         print("forward")
-        self.MotorRun(RMOTOR, 'forward', speed)
-        self.MotorRun(LMOTOR, 'forward', speed)
+        self.MotorRun(RMOTOR, 'forward', rightMotorSpeed)
+        self.MotorRun(LMOTOR, 'forward', leftMotorSpeed)
 
-    def Backward(self, direction, speed):
+    def Backward(self, rightMotorSpeed, leftMotorSpeed):
         print("backward")
-        self.MotorRun(RMOTOR, 'backward', speed)
-        self.MotorRun(LMOTOR, 'backward', speed)
+        self.MotorRun(RMOTOR, 'backward', rightMotorSpeed)
+        self.MotorRun(LMOTOR, 'backward', leftMotorSpeed)
 
     # Individual motor control including speed and direction, should be placed together
     def LeftMotor(self, direction, speed): # self, "backward"/"forward", 0-100

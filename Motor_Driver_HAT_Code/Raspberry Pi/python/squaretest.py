@@ -8,7 +8,7 @@ from time import sleep
 RMOTOR = 0
 LMOTOR = 1
 TESTSPEED = 90
-TESTTIME = 2.25
+TESTTIME = 2.30
 
 # Test code
 # Usage example:

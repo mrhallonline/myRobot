@@ -7,7 +7,8 @@ from time import sleep
 # Constants for direction
 RMOTOR = 0
 LMOTOR = 1
-TESTSPEED = 95
+TESTSPEEDRight = 85
+TESTSPEEDLeft = 85
 TESTTIME = 1
 
 # Test code
@@ -15,14 +16,11 @@ TESTTIME = 1
 Motor = robot.MotorDriver()
 
 # Forward motion
-Motor.Forward(TESTSPEED)
+Motor.Forward(TESTSPEEDRight, TESTSPEEDLeft)
 sleep(TESTTIME)
-Motor.Backward(TESTSPEED)
+Motor.Backward(TESTSPEEDRight, TESTSPEEDLeft)
 sleep(TESTTIME)
-Motor.Right(50, 75)
-sleep(TESTTIME)
-Motor.Left(75, 50)
-sleep(TESTTIME)
+
 
 # Stop
 Motor.MotorStop(RMOTOR)
