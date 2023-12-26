@@ -1,3 +1,4 @@
+import robot
 import RPi.GPIO as GPIO
 import time
 import threading
@@ -13,12 +14,6 @@ ECHO_PIN_LEFT = 17  # GPIO17
 
 TRIG_PIN_RIGHT = 6  # GPIO18
 ECHO_PIN_RIGHT = 5  # GPIO24
-
-# Set the GPIO mode and set the pins as input/output
-GPIO.setup(TRIG_PIN_LEFT, GPIO.OUT)
-GPIO.setup(ECHO_PIN_LEFT, GPIO.IN)
-GPIO.setup(TRIG_PIN_RIGHT, GPIO.OUT)
-GPIO.setup(ECHO_PIN_RIGHT, GPIO.IN)
 
 # Create locks for synchronization
 print_lock = threading.Lock()

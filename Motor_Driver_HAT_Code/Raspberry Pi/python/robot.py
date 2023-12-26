@@ -1,8 +1,11 @@
 #!/usr/bin/python
 # https://www.waveshare.com/wiki/Motor_Driver_HAT#Power
-
+import RPi.GPIO as GPIO
 from PCA9685 import PCA9685
 import time
+import threading
+from gpiozero import DistanceSensor
+from gpiozero.pins.pigpio import PiGPIOFactory
 
 # Constants for direction
 RMOTOR = 0
@@ -11,6 +14,22 @@ FORWARD = 'forward'
 BACKWARD ='backward'
 TESTSPEED = 100
 TESTTIME = 1
+
+# Set the GPIO mode to BCM
+GPIO.setmode(GPIO.BCM)
+
+# Define GPIO pins for the sensors
+TRIG_PIN_LEFT = 27  # GPIO27
+ECHO_PIN_LEFT = 17  # GPIO17
+
+TRIG_PIN_RIGHT = 6  # GPIO18
+ECHO_PIN_RIGHT = 5  # GPIO24
+
+# Set the GPIO mode and set the pins as input/output
+GPIO.setup(TRIG_PIN_LEFT, GPIO.OUT)
+GPIO.setup(ECHO_PIN_LEFT, GPIO.IN)
+GPIO.setup(TRIG_PIN_RIGHT, GPIO.OUT)
+GPIO.setup(ECHO_PIN_RIGHT, GPIO.IN)
 
 # Initialize the PCA9685 module
 pwm = PCA9685(0x40, debug=False)
