@@ -101,7 +101,7 @@ class Robot():
             self.left_distance = sensor_l.distance * 100  # Convert to cm
             with self.print_lock:
                 print(f"\rLeft Distance: {self.left_distance:.2f} cm |", end="")
-            time.sleep(1)  # Wait for 1 second between measurements
+            time.sleep(0.1)  # Wait for 1 second between measurements
 
     def read_right_sensor(self, queue_len):
         gpio_factory_right = PiGPIOFactory()  # Create a separate factory for the right sensor
@@ -110,7 +110,7 @@ class Robot():
             self.right_distance = sensor_r.distance * 100  # Convert to cm
             with self.print_lock:
                 print(f" Right Distance: {self.right_distance:.2f} cm", end="\n")
-            time.sleep(1)  # Wait for 1 second between measurements
+            time.sleep(0.1)  # Wait for 1 second between measurements
 
         # Methods to retrieve sensor readings
     def get_left_distance(self):

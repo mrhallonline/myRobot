@@ -15,7 +15,7 @@ MAX_SPEED = 75
 MIN_SPEED = 30
 OBSTACLE_THRESHOLD = 50  # Distance in cm at which to start slowing down
 OBSTACLE_CLOSE = 20      # Distance in cm for minimal speed or stop
-TESTTIME = 1  # Time the robot moves in a direction before checking distance again
+TESTTIME = 0.1  # Time the robot moves in a direction before checking distance again
 
 def calculate_speed(distance):
     if distance > OBSTACLE_THRESHOLD:
