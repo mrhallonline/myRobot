@@ -14,7 +14,16 @@ FORWARD = 'forward'
 BACKWARD ='backward'
 
 class Robot():
+        # Define motor constants
+    RMOTOR = 0
+    LMOTOR = 1
+
     def __init__(self):
+        GPIO.setmode(GPIO.BCM)  # Set the GPIO mode to BCM
+        GPIO.setwarnings(False)  # Suppress GPIO warnings
+
+        self.left_distance = 0
+        self.right_distance = 0
 
         # Create a lock for thread-safe print statements
         self.print_lock = threading.Lock()
@@ -28,10 +37,10 @@ class Robot():
         self.BIN2 = 4
 
         # Define GPIO pins for the sensors
-        self.TRIG_PIN_LEFT = 27  # GPIO27
-        self.ECHO_PIN_LEFT = 17  # GPIO17
-        self.TRIG_PIN_RIGHT = 6  # GPIO18
-        self.ECHO_PIN_RIGHT = 5  # GPIO24
+        self.TRIG_PIN_LEFT = 6  # GPIO27
+        self.ECHO_PIN_LEFT = 5  # GPIO17
+        self.TRIG_PIN_RIGHT = 27  # GPIO18
+        self.ECHO_PIN_RIGHT = 17  # GPIO24
 
         # Set the GPIO mode and set the pins as input/output
         GPIO.setup(self.TRIG_PIN_LEFT, GPIO.OUT)
@@ -89,16 +98,23 @@ class Robot():
         gpio_factory_left = PiGPIOFactory()  # Create a separate factory for the left sensor
         sensor_l = DistanceSensor(echo=self.ECHO_PIN_LEFT, trigger=self.TRIG_PIN_LEFT, queue_len=queue_len, pin_factory=gpio_factory_left)
         while True:
+            self.left_distance = sensor_l.distance * 100  # Convert to cm
             with self.print_lock:
-                distance_left = sensor_l.distance * 100  # Convert to cm
-                print(f"\rLeft Distance: {distance_left:.2f} cm |", end="")
+                print(f"\rLeft Distance: {self.left_distance:.2f} cm |", end="")
             time.sleep(1)  # Wait for 1 second between measurements
 
     def read_right_sensor(self, queue_len):
         gpio_factory_right = PiGPIOFactory()  # Create a separate factory for the right sensor
         sensor_r = DistanceSensor(echo=self.ECHO_PIN_RIGHT, trigger=self.TRIG_PIN_RIGHT, queue_len=queue_len, pin_factory=gpio_factory_right)
         while True:
+            self.right_distance = sensor_r.distance * 100  # Convert to cm
             with self.print_lock:
-                distance_right = sensor_r.distance * 100  # Convert to cm
-                print(f" Right Distance: {distance_right:.2f} cm", end="\n")
+                print(f" Right Distance: {self.right_distance:.2f} cm", end="\n")
             time.sleep(1)  # Wait for 1 second between measurements
+
+        # Methods to retrieve sensor readings
+    def get_left_distance(self):
+        return self.left_distance
+
+    def get_right_distance(self):
+        return self.right_distance

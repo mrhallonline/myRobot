@@ -11,17 +11,17 @@ TESTTIME = 1
 
 
 # Instantiatie the Robot class
-Motor = Robot()
+robot = Robot()
 
 # Forward motion
-Motor.Forward(TESTSPEEDRight, TESTSPEEDLeft)
+robot.Forward(TESTSPEEDRight, TESTSPEEDLeft)
 sleep(TESTTIME)
 
 #Backward motion
-Motor.Backward(TESTSPEEDRight, TESTSPEEDLeft)
+robot.Backward(TESTSPEEDRight, TESTSPEEDLeft)
 sleep(TESTTIME)
 
 
 # Stop both motors
-Motor.MotorStop(Motor.RMOTOR)
-Motor.MotorStop(Motor.LMOTOR)
+robot.MotorStop(Robot.RMOTOR)
+robot.MotorStop(Robot.LMOTOR)
